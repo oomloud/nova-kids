@@ -1,0 +1,404 @@
+/* ============================================================
+   NOVA WORLD — hi-fi cartoon design system
+   Bright, warm, rounded. No dark UI. Duolingo × Brawl Stars.
+   ============================================================ */
+
+:root{
+  /* surfaces */
+  --cream:    #FFF4DF;
+  --cream-2:  #FBE7C6;
+  --paper:    #FFFDF8;
+  --panel:    #FFFFFF;
+
+  /* primary warm amber/orange */
+  --amber:    #FFAA1D;
+  --amber-2:  #FF9012;
+  --amber-dk: #C96E07;   /* shadow edge */
+  --amber-lt: #FFD27A;
+
+  /* teal secondary */
+  --teal:     #21C0AE;
+  --teal-dk:  #11897C;
+  --teal-lt:  #9DE9DF;
+
+  /* accents */
+  --berry:    #FF5D73;
+  --berry-dk: #C9344A;
+  --flame:    #FF6A2C;   /* streak */
+  --flame-dk: #C9441A;
+  --coin:     #FFC23D;   /* coins */
+  --coin-dk:  #C98A12;
+  --grape:    #9B5DE5;   /* epic */
+  --grape-dk: #6E37AE;
+
+  /* text */
+  --ink:      #4A2F1A;
+  --ink-2:    #8A6B4F;
+  --ink-soft: #B59A7E;
+
+  /* rarity */
+  --r-common:  #9AA7B0;
+  --r-common-dk:#6F7B84;
+  --r-rare:    #3D8BE0;
+  --r-rare-dk: #245FA8;
+  --r-epic:    #9B5DE5;
+  --r-epic-dk: #6E37AE;
+  --r-legend:  #FFB72E;
+  --r-legend-dk:#C9841A;
+
+  --line:     #4A2F1A;       /* cartoon outline */
+  --line-soft:#E7D3B0;
+
+  --r-sm: 14px;
+  --r:    20px;
+  --r-lg: 30px;
+  --r-xl: 40px;
+
+  --font-display:"Fredoka", system-ui, sans-serif;
+  --font-body:   "Nunito", system-ui, sans-serif;
+
+  --ease-pop: cubic-bezier(.2,.9,.25,1.4);
+  --ease:     cubic-bezier(.2,.7,.2,1);
+}
+
+*{ box-sizing:border-box; }
+html,body{ margin:0; height:100%; }
+body{
+  background:#23160c;
+  font-family:var(--font-body);
+  color:var(--ink);
+  overflow:hidden;
+  -webkit-font-smoothing:antialiased;
+  -webkit-text-size-adjust:100%;
+}
+body.reduce-motion *{ animation-duration:.001ms !important; transition-duration:.001ms !important; }
+
+/* ---------- stage / scaler ---------- */
+#stage-wrap{ position:fixed; inset:0; display:grid; place-items:center; background:
+  radial-gradient(circle at 50% 30%, #3a2412, #1a1109); }
+#stage{
+  width:1280px; height:800px; position:relative; overflow:hidden;
+  transform-origin:center center;
+  background:var(--cream);
+  border-radius:28px;
+  box-shadow:0 30px 80px rgba(0,0,0,.5);
+}
+.screen{ position:absolute; inset:0; }
+
+/* ============================================================
+   Buttons — chunky cartoon w/ solid drop
+   ============================================================ */
+.btn{
+  font-family:var(--font-display); font-weight:600; font-size:21px;
+  border:none; border-radius:999px; cursor:pointer;
+  padding:14px 28px; color:#fff; line-height:1;
+  display:inline-flex; align-items:center; gap:10px;
+  background:var(--amber); box-shadow:0 6px 0 var(--amber-dk);
+  transition:transform .08s var(--ease), box-shadow .08s var(--ease), filter .12s var(--ease);
+  position:relative; user-select:none;
+}
+.btn:hover{ filter:brightness(1.05); }
+.btn:active{ transform:translateY(4px); box-shadow:0 2px 0 var(--amber-dk); }
+.btn.teal{ background:var(--teal); box-shadow:0 6px 0 var(--teal-dk); }
+.btn.berry{ background:var(--berry); box-shadow:0 6px 0 var(--berry-dk); }
+.btn.ghost{ background:var(--paper); color:var(--ink); box-shadow:0 6px 0 var(--line-soft); }
+.btn.sm{ font-size:17px; padding:10px 18px; box-shadow:0 5px 0 var(--amber-dk); }
+.btn.sm.teal{ box-shadow:0 5px 0 var(--teal-dk); }
+.btn.sm.ghost{ box-shadow:0 5px 0 var(--line-soft); }
+.btn.lg{ font-size:26px; padding:18px 40px; }
+.btn:disabled{ opacity:.5; cursor:default; }
+
+/* circular icon button */
+.icon-btn{
+  width:54px; height:54px; border-radius:50%; border:none; cursor:pointer;
+  background:var(--paper); color:var(--ink); font-size:24px;
+  box-shadow:0 5px 0 var(--line-soft); display:grid; place-items:center;
+  transition:transform .08s var(--ease), box-shadow .08s var(--ease);
+}
+.icon-btn:active{ transform:translateY(3px); box-shadow:0 2px 0 var(--line-soft); }
+
+/* ============================================================
+   Currency HUD
+   ============================================================ */
+.hud{ position:absolute; top:18px; right:18px; display:flex; gap:10px; align-items:center; z-index:60; }
+.pill{
+  display:inline-flex; align-items:center; gap:8px;
+  background:var(--paper); border-radius:999px; padding:8px 15px 8px 10px;
+  font-family:var(--font-display); font-weight:600; font-size:19px; color:var(--ink);
+  box-shadow:0 4px 0 rgba(74,47,26,.18), inset 0 0 0 3px #fff;
+}
+.pill .ic{ width:30px; height:30px; border-radius:50%; display:grid; place-items:center; font-size:18px; }
+.pill.flame .ic{ background:var(--flame); }
+.pill.coin .ic{ background:var(--coin); }
+
+/* chest token bar */
+.chestbar{
+  display:flex; align-items:center; gap:10px;
+  background:var(--paper); border-radius:999px; padding:7px 8px 7px 16px;
+  box-shadow:0 4px 0 rgba(74,47,26,.18), inset 0 0 0 3px #fff;
+}
+.chestbar .track{
+  position:relative; width:200px; height:22px; border-radius:999px;
+  background:#F0E2C6; overflow:hidden; box-shadow:inset 0 2px 4px rgba(74,47,26,.18);
+}
+.chestbar .fill{ position:absolute; inset:0 auto 0 0;
+  background:linear-gradient(180deg,var(--amber-lt),var(--amber)); border-radius:999px;
+  transition:width .6s var(--ease); }
+.chestbar .fill::after{ content:""; position:absolute; inset:2px 4px auto 4px; height:5px;
+  background:rgba(255,255,255,.55); border-radius:999px; }
+.chestbar .val{ position:absolute; inset:0; display:grid; place-items:center;
+  font-family:var(--font-display); font-weight:600; font-size:13px; color:#7a4e08; z-index:2; }
+.chestbar .chesticon{
+  width:42px; height:42px; border-radius:13px; display:grid; place-items:center; font-size:24px;
+  background:linear-gradient(180deg,#FFD98A,#F2B53A); box-shadow:0 3px 0 var(--coin-dk);
+  position:relative;
+}
+.chestbar .chesticon.ready{ animation:chestShake .5s var(--ease) infinite; }
+@keyframes chestShake{ 0%,100%{transform:rotate(0)} 25%{transform:rotate(-7deg)} 75%{transform:rotate(7deg)} }
+
+/* ============================================================
+   Panels / cards
+   ============================================================ */
+.panel{ background:var(--panel); border-radius:var(--r-lg); box-shadow:0 10px 0 rgba(74,47,26,.12); }
+
+.card{
+  background:var(--panel); border-radius:var(--r-lg); overflow:hidden;
+  box-shadow:0 8px 0 rgba(74,47,26,.14); border:3px solid #fff;
+  transition:transform .12s var(--ease), box-shadow .12s var(--ease);
+}
+.card.tappable{ cursor:pointer; }
+.card.tappable:hover{ transform:translateY(-4px); box-shadow:0 12px 0 rgba(74,47,26,.16); }
+.card.tappable:active{ transform:translateY(2px); box-shadow:0 5px 0 rgba(74,47,26,.16); }
+
+.tag{
+  font-family:var(--font-display); font-weight:600; font-size:13px; letter-spacing:.02em;
+  padding:4px 11px; border-radius:999px; color:#fff; display:inline-flex; align-items:center; gap:5px;
+  white-space:nowrap;
+}
+.tag.arcade{ background:var(--berry); } .tag.vocab{ background:var(--teal); }
+.tag.tutor{ background:var(--grape); } .tag.daily{ background:var(--amber-2); }
+.tag.today{ background:var(--flame); } .tag.ghost{ background:#F0E2C6; color:var(--ink-2); }
+
+/* reward token pill */
+.tok{
+  font-family:var(--font-display); font-weight:600; color:#7a4e08;
+  background:linear-gradient(180deg,var(--amber-lt),var(--amber));
+  border-radius:999px; padding:5px 13px; display:inline-flex; align-items:center; gap:5px;
+  box-shadow:0 3px 0 var(--amber-dk);
+}
+
+/* ============================================================
+   Image placeholders (image-slot styling lives in the component;
+   this is the fallback look for plain .art boxes)
+   ============================================================ */
+image-slot{ display:block; }
+.art-ph{
+  display:grid; place-items:center; text-align:center; gap:6px;
+  background:
+    repeating-linear-gradient(45deg, rgba(255,255,255,.4) 0 10px, rgba(255,255,255,0) 10px 20px),
+    var(--cream-2);
+  color:var(--ink-2); font-family:var(--font-display); font-weight:600;
+  border:3px dashed rgba(74,47,26,.2); border-radius:var(--r);
+}
+.art-ph .g{ font-size:40px; }
+.art-ph .l{ font-size:14px; }
+
+/* ============================================================
+   Pandy + speech bubble
+   ============================================================ */
+.bubble{
+  position:relative; background:#fff; border-radius:22px; padding:16px 18px;
+  box-shadow:0 7px 0 rgba(74,47,26,.14); max-width:330px;
+}
+.bubble::after{ content:""; position:absolute; left:34px; bottom:-15px; width:26px; height:26px;
+  background:#fff; clip-path:polygon(0 0,100% 0,0 100%); transform:rotate(0); box-shadow:0 6px 0 rgba(74,47,26,.05);}
+.bubble p{ margin:0 0 10px; font-weight:800; font-size:18px; line-height:1.25; color:var(--ink); }
+.bubble .acts{ display:flex; gap:8px; }
+
+/* ============================================================
+   Hotspots (hub point-and-click)
+   ============================================================ */
+.hotspot{ position:absolute; cursor:pointer; transition:transform .14s var(--ease-pop); }
+.hotspot:hover{ transform:scale(1.05); }
+.hotspot:active{ transform:scale(.97); }
+.hotspot .label{
+  position:absolute; left:50%; bottom:-14px; transform:translateX(-50%);
+  font-family:var(--font-display); font-weight:600; font-size:15px; color:#fff;
+  background:var(--line); padding:4px 12px; border-radius:999px; white-space:nowrap;
+  box-shadow:0 3px 0 rgba(0,0,0,.25);
+}
+.hotspot .nbadge{
+  position:absolute; top:-10px; right:-10px; min-width:30px; height:30px; padding:0 6px;
+  background:var(--berry); color:#fff; border-radius:999px; border:3px solid #fff;
+  font-family:var(--font-display); font-weight:600; font-size:16px; display:grid; place-items:center;
+  box-shadow:0 3px 0 var(--berry-dk);
+}
+.glowing{ animation:glowPulse 1.6s ease-in-out infinite; }
+@keyframes glowPulse{ 0%,100%{ filter:drop-shadow(0 0 0 rgba(255,170,29,0)); }
+  50%{ filter:drop-shadow(0 0 18px rgba(255,170,29,.9)); } }
+
+/* ============================================================
+   Overlays
+   ============================================================ */
+.overlay{ position:absolute; inset:0; z-index:80; display:grid; place-items:center;
+  background:rgba(40,24,10,.55); }
+.sheet{ animation:sheetUp .42s var(--ease-pop) both; }
+@keyframes sheetUp{ from{ transform:translateY(60px); opacity:0;} to{ transform:translateY(0); opacity:1;} }
+.pop{ animation:popIn .4s var(--ease-pop); }
+@keyframes popIn{ from{ transform:scale(.6); opacity:0;} to{ transform:scale(1); opacity:1;} }
+
+/* ============================================================
+   Bottom dock (lightweight — D is mostly diegetic, but keep a
+   small dock so the prototype is navigable)
+   ============================================================ */
+.dock{
+  position:absolute; left:50%; bottom:16px; transform:translateX(-50%); z-index:60;
+  display:flex; gap:6px; background:var(--paper); padding:8px; border-radius:22px;
+  box-shadow:0 6px 0 rgba(74,47,26,.18), inset 0 0 0 3px #fff;
+}
+.dock .d{
+  width:74px; display:flex; flex-direction:column; align-items:center; gap:2px; cursor:pointer;
+  padding:6px 4px; border-radius:15px; font-family:var(--font-display); font-weight:600; font-size:12px;
+  color:var(--ink-2); position:relative; transition:background .12s var(--ease), color .12s var(--ease);
+}
+.dock .d .di{ font-size:24px; }
+.dock .d.active{ background:var(--amber); color:#fff; }
+.dock .d .badge{ position:absolute; top:0; right:12px; min-width:18px; height:18px; padding:0 4px;
+  background:var(--berry); color:#fff; border-radius:999px; font-size:11px; display:grid; place-items:center;
+  border:2px solid var(--paper); font-family:var(--font-display); }
+
+/* ============================================================
+   Misc helpers + animations
+   ============================================================ */
+.h-title{ font-family:var(--font-display); font-weight:600; }
+.flycoin{ position:absolute; z-index:90; font-family:var(--font-display); font-weight:700;
+  pointer-events:none; }
+@keyframes floaty{ 0%,100%{ transform:translateY(0);} 50%{ transform:translateY(-10px);} }
+.floaty{ animation:floaty 3s ease-in-out infinite; }
+@keyframes spinSlow{ to{ transform:rotate(360deg);} }
+.confetti{ position:absolute; width:14px; height:14px; border-radius:3px; z-index:85; pointer-events:none; }
+
+/* progress meter (journey) */
+.meter{ height:18px; border-radius:999px; background:#F0E2C6; overflow:hidden;
+  box-shadow:inset 0 2px 4px rgba(74,47,26,.2); position:relative; }
+.meter .mfill{ position:absolute; inset:0 auto 0 0; border-radius:999px;
+  background:linear-gradient(180deg,var(--teal-lt),var(--teal)); transition:width .8s var(--ease-pop); }
+
+/* ============================================================
+   Hub café scene (flat cartoon, CSS-drawn)
+   ============================================================ */
+.hub-wall{ background:linear-gradient(180deg,#FFE9C4 0%, #FFDFAE 58%); }
+.hub-floor{ position:absolute; left:0; right:0; bottom:0; height:32%;
+  background:linear-gradient(180deg,#E1A266,#C9854A);
+  border-top:5px solid #A86A36; }
+.hub-floor::before{ content:""; position:absolute; inset:0;
+  background:repeating-linear-gradient(90deg, rgba(168,106,54,.0) 0 78px, rgba(168,106,54,.35) 78px 82px); }
+.wainscot{ position:absolute; left:0; right:0; bottom:32%; height:14px; background:#F3C98C; border-top:4px solid #D9A862; }
+
+.hub-window{ position:absolute; left:70px; top:70px; width:240px; height:200px; border-radius:24px;
+  background:linear-gradient(180deg,#BFE9FF,#8FD3F4); border:10px solid #FFF7E8;
+  box-shadow:0 8px 0 rgba(74,47,26,.14); overflow:hidden; }
+.hub-window .sun{ position:absolute; right:24px; top:18px; width:50px; height:50px; border-radius:50%;
+  background:#FFD23D; box-shadow:0 0 0 10px rgba(255,210,61,.35); }
+.hub-window .cloud{ position:absolute; left:26px; top:90px; width:90px; height:30px; background:#fff; border-radius:999px; }
+.hub-window .cloud::after{ content:""; position:absolute; left:24px; top:-16px; width:42px; height:42px; background:#fff; border-radius:50%; }
+.hub-window .bar{ position:absolute; inset:0; }
+.hub-window .bar::before,.hub-window .bar::after{ content:""; position:absolute; background:#FFF7E8; }
+.hub-window .bar::before{ left:50%; top:0; bottom:0; width:8px; transform:translateX(-50%); }
+.hub-window .bar::after{ top:50%; left:0; right:0; height:8px; transform:translateY(-50%); }
+
+.hub-lamp{ position:absolute; top:0; width:5px; height:58px; background:#7A4E2C; }
+.hub-lamp::after{ content:""; position:absolute; left:50%; bottom:-34px; transform:translateX(-50%);
+  width:74px; height:50px; background:linear-gradient(180deg,#FFB22E,#E8830C);
+  border-radius:50% 50% 14px 14px / 70% 70% 14px 14px; box-shadow:0 0 44px rgba(255,180,60,.7), 0 4px 0 rgba(74,47,26,.18); }
+
+.hub-counter{ position:absolute; right:0; bottom:32%; width:360px; height:150px;
+  background:linear-gradient(180deg,#7A4E2C,#5E3A1F); border-radius:26px 0 0 0; border:5px solid #4A2F1A; border-right:none;
+  box-shadow:0 -6px 0 rgba(0,0,0,.1) inset; }
+.hub-counter .machine{ position:absolute; right:40px; top:-58px; width:90px; height:78px; background:#E9ECEF;
+  border-radius:14px; border:4px solid #4A2F1A; }
+.hub-counter .machine::after{ content:"☕"; position:absolute; inset:0; display:grid; place-items:center; font-size:30px; }
+.steam{ position:absolute; width:8px; height:30px; background:rgba(255,255,255,.7); border-radius:999px;
+  animation:steam 2.4s ease-in-out infinite; }
+@keyframes steam{ 0%{ transform:translateY(0) scaleY(.6); opacity:0;} 30%{opacity:.8;} 100%{ transform:translateY(-34px) scaleY(1.2); opacity:0;} }
+.hub-rug{ position:absolute; left:44%; bottom:6%; transform:translateX(-50%); width:420px; height:90px;
+  background:radial-gradient(ellipse, #F2A25B 40%, #E08C42 41% 100%); border-radius:50%; opacity:.55; }
+.hub-cat{ position:absolute; left:36px; bottom:30%; font-size:46px; transform:rotate(-6deg); }
+.hub-plant{ position:absolute; font-size:60px; }
+
+/* corkboard (missions hotspot) */
+.corkboard{ width:210px; height:150px; }
+.corkboard .board{ width:100%; height:100%; background:#D7A867; border:10px solid #8A5A2E; border-radius:14px;
+  box-shadow:0 8px 0 rgba(74,47,26,.2); display:grid; place-items:center; gap:6px; padding:10px; }
+.corkboard .board .ttl{ font-family:var(--font-display); font-weight:600; color:#5E3A1F; font-size:20px; }
+.corkboard .note-pin{ position:absolute; width:54px; height:54px; border-radius:8px; transform:rotate(-5deg);
+  background:#FFF; box-shadow:0 4px 0 rgba(74,47,26,.18); display:grid; place-items:center; font-size:26px; }
+
+/* café door (activities hotspot) */
+.cafe-door{ width:150px; height:280px; }
+.cafe-door .door{ width:100%; height:100%; background:linear-gradient(180deg,#C96E07,#A85806);
+  border:8px solid #4A2F1A; border-radius:80px 80px 12px 12px; box-shadow:0 8px 0 rgba(74,47,26,.2); position:relative; }
+.cafe-door .door::after{ content:""; position:absolute; right:20px; top:50%; width:16px; height:16px; border-radius:50%; background:#FFD23D; }
+.cafe-door .door .win{ position:absolute; left:50%; top:30px; transform:translateX(-50%); width:80px; height:80px;
+  border-radius:50%; background:#BFE9FF; border:6px solid #FFF7E8; }
+.cafe-door .sign{ position:absolute; top:-2px; left:50%; transform:translateX(-50%); }
+
+/* signpost (map hotspot) */
+.signpost{ width:120px; height:150px; }
+.signpost .post{ position:absolute; left:50%; bottom:0; transform:translateX(-50%); width:14px; height:120px; background:#8A5A2E; }
+.signpost .arrow{ position:absolute; left:50%; top:10px; transform:translateX(-55%); width:120px; height:46px;
+  background:var(--teal); border:5px solid var(--teal-dk); border-radius:8px; color:#fff;
+  font-family:var(--font-display); font-weight:600; font-size:18px; display:flex; align-items:center; justify-content:center; gap:6px;
+  clip-path:polygon(0 0, 86% 0, 100% 50%, 86% 100%, 0 100%); box-shadow:0 6px 0 rgba(74,47,26,.18); }
+
+/* character stand (slot + shadow) */
+.stand{ position:absolute; }
+.stand .shadow{ position:absolute; left:50%; bottom:-12px; transform:translateX(-50%);
+  width:78%; height:24px; background:rgba(74,47,26,.22); border-radius:50%; filter:blur(2px); }
+.wardrobe-btn{ position:absolute; width:50px; height:50px; border-radius:50%; background:var(--teal);
+  border:4px solid #fff; box-shadow:0 4px 0 var(--teal-dk); display:grid; place-items:center; font-size:22px; cursor:pointer; }
+
+.toast-wrap{ position:absolute; top:84px; left:50%; transform:translateX(-50%); z-index:95;
+  display:flex; flex-direction:column; gap:8px; align-items:center; pointer-events:none; }
+.toast{ background:var(--line); color:#fff; font-family:var(--font-display); font-weight:600;
+  font-size:17px; padding:10px 20px; border-radius:999px; box-shadow:0 5px 0 rgba(0,0,0,.25);
+  animation:toastIn .3s var(--ease-pop); }
+@keyframes toastIn{ from{ transform:translateY(-12px); opacity:0;} to{ transform:translateY(0); opacity:1;} }
+
+/* ============================================================
+   Reward moment + chest opening
+   ============================================================ */
+.vhero{ width:200px; height:200px; border-radius:50%; display:grid; place-items:center; font-size:120px;
+  background:radial-gradient(circle,#FFE9B0,#FFCF66); box-shadow:0 12px 0 var(--coin-dk);
+  animation:jump 1s var(--ease-pop) infinite; }
+@keyframes jump{ 0%,100%{ transform:translateY(0) scale(1);} 40%{ transform:translateY(-40px) scale(1.04);} 60%{ transform:translateY(-30px);} }
+.big-tok{ font-family:var(--font-display); font-weight:700; font-size:96px; color:#fff;
+  text-shadow:0 6px 0 var(--amber-dk); animation:popIn .5s var(--ease-pop); }
+
+.rmeter{ width:460px; }
+.rmeter .bar{ height:26px; border-radius:999px; background:#F0E2C6; overflow:hidden; position:relative;
+  box-shadow:inset 0 2px 4px rgba(74,47,26,.2); border:3px solid #fff; }
+.rmeter .barfill{ position:absolute; inset:0 auto 0 0; border-radius:999px;
+  background:linear-gradient(90deg,var(--r-common),var(--r-rare),var(--r-epic)); transition:width 1s var(--ease-pop); }
+.rmeter .pointer{ position:absolute; top:-8px; width:5px; height:40px; background:var(--line); border-radius:3px; transition:left 1s var(--ease-pop); }
+.rmeter .ticks{ display:flex; justify-content:space-between; margin-top:6px; font-family:var(--font-display);
+  font-weight:600; font-size:12px; }
+
+.chest3d{ width:230px; height:190px; border-radius:24px; position:relative;
+  background:linear-gradient(180deg,#F2B53A,#D89412); border:6px solid #8A5A2E;
+  display:grid; place-items:center; font-size:110px; box-shadow:0 0 0 14px rgba(255,180,60,.28), 0 0 60px rgba(255,180,60,.6); }
+.chest3d.shaking{ animation:chestShake .45s var(--ease) infinite; cursor:pointer; }
+
+.rcard{ width:180px; border-radius:24px; overflow:hidden; background:#fff; border:4px solid #fff;
+  box-shadow:0 10px 0 rgba(74,47,26,.16); position:relative; }
+@keyframes cardFlip{ from{ transform:scale(.85);} to{ transform:scale(1);} }
+.rcard .top{ height:130px; display:grid; place-items:center; font-size:64px; }
+.rcard .meta{ padding:12px; text-align:center; }
+.rcard .rar{ font-family:var(--font-display); font-weight:600; font-size:13px; letter-spacing:.08em; text-transform:uppercase; }
+.rcard .nm{ font-weight:800; font-size:16px; color:var(--ink); margin-top:2px; }
+.rcard .newb{ position:absolute; top:10px; right:10px; background:var(--grape); color:#fff;
+  font-family:var(--font-display); font-weight:600; font-size:12px; padding:3px 10px; border-radius:999px; border:2px solid #fff; }
+.rcard .dupb{ position:absolute; top:10px; right:10px; background:var(--coin); color:#5E3A1F;
+  font-family:var(--font-display); font-weight:600; font-size:13px; padding:4px 10px; border-radius:999px; border:2px solid #fff;
+  animation:popIn .4s var(--ease-pop); }
+
