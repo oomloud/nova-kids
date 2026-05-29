@@ -246,7 +246,7 @@ function WorldMap({ s, onClose }){
       <button className="icon-btn" style={{ position:'absolute', right:'24px', top:'26px' }} onClick={onClose}>✕</button>
 
       {/* path */}
-      <svg viewBox="0 0 1280 800" style={{ position:'absolute', inset:0, width:'100%', height:'100%' }}>
+      <svg viewBox="0 0 1280 800" style={{ position:'absolute', inset:0, width:'100%', height:'100%', pointerEvents:'none' }}>
         <polyline points={xs.map((x,i)=>`${x},${ys[i]}`).join(' ')}
           fill="none" stroke="#fff" strokeWidth="22" strokeLinecap="round" strokeLinejoin="round" opacity="0.85" />
         <polyline points={xs.map((x,i)=>`${x},${ys[i]}`).join(' ')}
