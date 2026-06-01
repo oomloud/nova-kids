@@ -147,7 +147,7 @@ body.reduce-motion *{ animation-duration:.001ms !important; transition-duration:
 .chestbar .fill::after{ content:""; position:absolute; inset:2px 4px auto 4px; height:5px;
   background:rgba(255,255,255,.55); border-radius:999px; }
 .chestbar .val{ position:absolute; inset:0; display:grid; place-items:center;
-  font-family:var(--font-display); font-weight:600; font-size:13px; color:#7a4e08; z-index:2; }
+  font-family:var(--font-display); font-weight:600; font-size:13px; color:#7a4e08; z-index:2; white-space:nowrap; }
 .chestbar .chesticon{
   width:42px; height:42px; border-radius:13px; display:grid; place-items:center; font-size:24px;
   background:linear-gradient(180deg,#FFD98A,#F2B53A); box-shadow:0 3px 0 var(--coin-dk);
